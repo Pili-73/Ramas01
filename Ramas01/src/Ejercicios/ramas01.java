@@ -16,7 +16,12 @@ public class ramas01 {
 					sc);
 
 			if (opcion == 1) {
-				agregarNota(totalAlumnos, sumNota, maxNota, minNota, sc);
+				double nota = Funciones.dimeDouble("Escribe la nota", sc);
+				agregarNota(nota, sc);
+				totalAlumnos++;
+				sumNota += nota;
+				maxNota = Math.max(maxNota, nota);
+				minNota = Math.min(minNota, nota);
 
 			} else if (opcion == 2) {
 				calcularPromedio(totalAlumnos, sumNota);
@@ -33,17 +38,11 @@ public class ramas01 {
 		} while (opcion != 0);
 	}
 
-	public static void agregarNota(int totalAlumnos, double sumNota, double maxNota, double minNota, Scanner sc) {
-		double nota;
-		do {
-			nota = Funciones.dimeDouble("Escribe la nota", sc);
-			if (nota >= 0 && nota <= 10) {
-				totalAlumnos++;
-				sumNota += nota;
-				maxNota = Math.max(maxNota, nota);
-				minNota = Math.min(minNota, nota);
-			}
-		} while (nota > 10 || nota < 0);
+	public static void agregarNota(double nota, Scanner sc) {
+		while (nota > 10 || nota < 0) {
+			System.out.println("");
+			nota = Funciones.dimeDouble("Debe ser entre 0 y 10", sc);
+		}
 	}
 
 	public static void calcularPromedio(int totalAlumnos, double sumNota) {
